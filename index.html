@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Sentiment Analysis 101</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Sentiment Analysis 101</h1>
+				</section>
+				
+				<section>
+					<section>
+						<img src="images/bifurcation.jpg" width=400 height=400>
+						<p align="down left">Português ></br>English v</p>
+					</section>
+
+					<section>
+						<h3>Concept</h3>
+						<p>SA is contextual mining of text which identifies and extracts subjective information in source material, and helping a business to understand the social sentiment of their brand, product or service.</p>
+						<img src="images/Words.png">
+					</section>
+
+					<section>
+						<h2>Analysis</h2>
+						<p>Two parameters are essential in a SA, Polarity and Subjectivity.</p>
+						<p>Polarity, is the emotion in a sentence</p>
+						<p>Subjectivity, is the personanl feelings, visions in that sentence</p>
+					</section>
+
+					<section>
+						<h2>Some Examples</h2>
+						<i>I'm like this speech</i></br>
+						<b>The sentence above show a example of Polarity</b></br>
+						<i>I'm here today to see this speech</i></br>
+						<b>This one perhaps, show a a example of subjectivity</b>
+					</section>
+
+					<section>
+						<h2>Polarity X Subjectivity</h2>
+						<img src="images/sosimple.jpg" width=580 height=500>
+					</section>
+
+					<section>
+						<h2>Polarity X Subjectivity</h2>
+						<img src="images/SOterm.png" width=600 height=500>
+					</section>
+
+					<section>
+						<h2>Natural Language Processing (NLP)</h2>
+						<p>The computer don't know the meaning of words in a sentence, that's why we use NLP, and after a Tokenization, we have POS (part of speech) terms</p>
+					</section>
+	
+					<section>
+						<h2>POS Tags</h2>
+						<img src="images/POS-Tags.png">						
+					</section>
+
+					<section>
+						<h2>Sentiment Analysis From Twitter</h2>
+						<p>Now, in this small example, we go analise the sentiment of a hashtag.</p>
+						<p>For this SA, we use TextBlob module.</p>
+						<img src="images/textblob-logo.png" width=180 height=180>
+					</section>
+
+					<section>
+					<pre><code>
+from textblob import TextBlob as tb
+import tweepy
+import numpy as np
+
+consumer_key = 'your consumer key'
+consumer_secret = 'your consumer secret'
+access_token = 'your access token'
+access_token_secret = 'your acess token secret'
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+
+public_tweets = api.search('Github')
+
+analysis = None
+
+for tweet in public_tweets:
+    print(tweet.text)    
+    analysis = tb(tweet.text)
+    print(analysis.sentiment.polarity)
+    
+					</code></pre>
+					</section>
+
+					<section>
+						<h2>SA of TextBlob</h2>
+						<p>Created a blob with the text from tweet, and after analysis we have a average with the range of [-1.0, 1.0]</p>
+						<p>Where values under zero, are negative feelings, and above zero, positive feelings</p>
+					</section>
+				
+					<section>
+						<img src="images/question.png" width=256 height=256>
+						<h2>print('Thank You!')</h2>
+						<a href="http://github.com/newtongaliza" target="_blank">github.com/newtongaliza</a>
+						<p>newtonjgaliza@gmail.com</p>
+						<p>@newtongaliza</p>
+					</section>
+					
+	
+				</section>
+			
+				<section>
+					<h2>Conceito</h2>
+					<p>AS é uma análise contextual que busca identificar e extrair informação subjetiva do material fonte,
+                                        com o objetivo de ajudar um negócio, marca ou serviço a entender o sentimento social atrelado a ele. Geralmente realizando monitaramento em redes sociais.</p>
+				</section>
+
+				<section>
+					<h2>Análise</h2>
+					<p>Dois parâmetros são primordiais numa AS, Polaridade e Subjetividade.</p>
+					<p>Polaridade, é a emoção expressa em uma sentença.</p>		
+					<p>Subjetividade, é a expressão de sentimentos pessoais, visão ou crença.</p>
+				</section>
+				
+				<section>
+					<h2>Alguns Exemplos</h2>
+					<i>Estou gostando dessa palestra.</i></br>
+					<b>A sentença acima mostra um exemplo de Polaridade</b></br>
+					<i>Estou aqui hoje vendo uma palestra sobre Análise de Sentimento.</i></br>
+					<b>Já essa sentença, mostra um exemplo de subjetividade</b>
+				</section>
+				
+				<section>
+					<h3>Polaridade x Subjetividade</h3>
+					<img src="images/sosimple.jpg" width=580 height=550>
+				</section>
+				
+				<section>
+					<h3>Polaridade x Subjetividade</h3>
+					<img src="images/SOterm.png" width=600 height=550>
+				</section>
+
+				<section>
+					<h2>Natural Language Processing (NLP)</h2>
+					<p>O computador não sabe o significado das palavras presentes numa sentença, para isso usamos NLP, que vai passar por uma Tokenization, para entao termos um POS(part of speech).</p>
+				</section>
+				
+				<section>
+					<h2>POS Tags</h2>
+					<img src="images/POS-Tags.png">
+				</section>
+
+				<section>
+					<h2>Análise de Sentimentos do Twitter</h2>
+					<p>Vamos agora para um pequeno exemplo, onde iremos analisar os sentimentos de uma determinada hashtag.</p>
+					<p>Iremos utilizar o módulo TextBlob.</p>
+					<img src="images/textblob-logo.png" width=180 height=180>
+				</section>
+
+				<section>
+					<pre><code>
+from textblob import TextBlob as tb
+import tweepy
+import numpy as np
+
+consumer_key = 'your consumer key'
+consumer_secret = 'your consumer secret'
+access_token = 'your access token'
+access_token_secret = 'your acess token secret'
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+
+public_tweets = api.search('Github')
+
+analysis = None
+
+for tweet in public_tweets:
+    print(tweet.text)    
+    analysis = tb(tweet.text)
+    print(analysis.sentiment.polarity)
+    
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>AS do TextBlob</h2>
+					<p>Criamos um blob com o texto do tweet, e após análise temos um resultado com uma média de range [-1.0, 1.0]</p>
+					<p>Onde valores abaixo de zero, são sentimentos negativos e acima de zero, análises satisfatórias</p>
+				</section>
+
+				<section>
+					<img src="images/question.png" width=256 height=256>
+					<h2>print('Muito Obrigado!')</h2>
+					<a href="http://github.com/newtongaliza" target="_blank">github.com/newtongaliza</a>
+					<p>newtonjgaliza@gmail.com</p>
+					<p>@newtongaliza</p>
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
